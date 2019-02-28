@@ -7,7 +7,6 @@ Email: wangytj@bu.edu
 Name: Steve Gougherty
 Email: gougher@bu.edu
 
-
 Name: Ryan Quinn 
 Email: rkq@bu.edu 
 
