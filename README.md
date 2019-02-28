@@ -5,3 +5,6 @@ Email: wangytj@bu.edu
 
 Name: Steve Gougherty
 Email: gougher@bu.edu
+
+Name: Zoey Werbin
+Email: zrwerbin@gmail.com
