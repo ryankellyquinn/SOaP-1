@@ -16,10 +16,15 @@ write.table(locs, paste0(tempdir(),"/locations.csv"),
             row.names = FALSE,
             quote = FALSE)
 
+#This line of code makes sure you get the most recent data since daymet is updated once a year. 
+end.year  <- as.numeric(substr(Sys.Date(),1,4)) - 1
+
+
+#download the data here. 
 daymet_data <- download_daymet_batch(file_location = paste0(tempdir(),
                                                             "/locations.csv"),
                                      start=2010,
-                                     end=2018,
+                                     end=end.year,
                                      internal=TRUE,
                                      silent=TRUE)
 #HARV can call each site 1-5
@@ -31,7 +36,7 @@ dayyear <- paste(days.harv, harv_wx$year, sep="-")
 harv_wx$dayyear <-dayyear
 HARVdta <- as.Date(as.character(dayyear), format="%m-%d-%Y")
 
-
+head(harv_wx)
 #DSNY
 DSNY <- as.matrix(daymet_data[[2]]$data)
 dsny_wx <- as.data.frame(DSNY)
@@ -68,9 +73,23 @@ dayyear <- paste(days.ster, cper_wx$year, sep="-")
 cper_wx$dayyear <-dayyear
 CPERdta <- as.Date(as.character(dayyear), format="%m-%d-%Y")
 
+#plot of min temps for each site
 plot(HARVdta, harv_wx$tmin..deg.c., type='l', ylim=c(-30,25))
 points(DSNYdta, dsny_wx$tmin..deg.c., type='l', col=rgb(red=1,green=0,blue=0, alpha=0.5))
 points(OSBSdta, osbs_wx$tmin..deg.c., type='l', col=rgb(red=1,green=1,blue=0, alpha=0.3))
 points(STERdta, ster_wx$tmin..deg.c., type='l', col=rgb(red=0,green=1,blue=1, alpha=0.5))
 points(CPERdta, cper_wx$tmin..deg.c., type='l', col=rgb(red=0,green=0,blue=1, alpha=0.5))
 
+#plot of max temps for each site
+plot(HARVdta, harv_wx$tmax..deg.c., type='l', ylim=c(-20,40))
+points(DSNYdta, dsny_wx$tmax..deg.c., type='l', col=rgb(red=1,green=0,blue=0, alpha=0.5))
+points(OSBSdta, osbs_wx$tmax..deg.c., type='l', col=rgb(red=1,green=1,blue=0, alpha=0.3))
+points(STERdta, ster_wx$tmax..deg.c., type='l', col=rgb(red=0,green=1,blue=1, alpha=0.5))
+points(CPERdta, cper_wx$tmax..deg.c., type='l', col=rgb(red=0,green=0,blue=1, alpha=0.5))
+
+#plot of precip for each site
+plot(HARVdta, harv_wx$prcp..mm.day., type='l', ylim=c(0,200))
+points(DSNYdta, dsny_wx$prcp..mm.day, type='l', col=rgb(red=1,green=0,blue=0, alpha=0.5))
+points(OSBSdta, osbs_wx$prcp..mm.day, type='l', col=rgb(red=1,green=1,blue=0, alpha=0.3))
+points(STERdta, ster_wx$prcp..mm.day, type='l', col=rgb(red=0,green=1,blue=1, alpha=0.5))
+points(CPERdta, cper_wx$prcp..mm.day, type='l', col=rgb(red=0,green=0,blue=1, alpha=0.5))
