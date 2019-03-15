@@ -33,7 +33,8 @@ for (time in 2013:2013)
         p=which(!is.na(value));
         
         # calculate and record the mean CHM of the 1km by 1km unit area        
-        head=rbind(head,c(mean(value[p]),i,j));}
+        if(length(p)>0){
+          head=rbind(head,c(mean(value[p]),i,j));}}
     }    
   }  
 }
