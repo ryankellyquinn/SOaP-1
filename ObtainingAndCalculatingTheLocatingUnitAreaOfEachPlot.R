@@ -38,7 +38,7 @@ UTM_CPER_Soilcore <- LatitudeLongitudeToUTM(coord_CPER[,2],coord_CPER[,1],1:6,13
 UTM_CPER_CorrespondingUnitArea <- cbind(floor(UTM_CPER_Soilcore[,2]/1000)*1000,floor(UTM_CPER_Soilcore[,3]/1000)*1000);
 
 ## Finding the corresponding mean CHM value
-D=read.csv("CPER_CHM_2013.csv",header=TRUE, sep=",");
+D=read.csv("/usr3/graduate/wangytj/GE585-Share/CPER_CHM_2013.csv",header=TRUE, sep=",");
 CHM_CPER=D[2:dim(D)[1],2:dim(D)[2]];
 CHM_Value=matrix(0,dim(UTM_CPER_CorrespondingUnitArea)[1],1);
 for (i in 1:dim(UTM_CPER_CorrespondingUnitArea)[1])
@@ -71,7 +71,7 @@ UTM_DSNY_Soilcore <- LatitudeLongitudeToUTM(coord_DSNY[,2],coord_DSNY[,1],1:6,17
 UTM_DSNY_CorrespondingUnitArea <- cbind(floor(UTM_DSNY_Soilcore[,2]/1000)*1000,floor(UTM_DSNY_Soilcore[,3]/1000)*1000);
 
 ## Finding the corresponding mean CHM value
-D=read.csv("DSNY_CHM_2014.csv",header=TRUE, sep=",");
+D=read.csv("/usr3/graduate/wangytj/GE585-Share/DSNY_CHM_2014.csv",header=TRUE, sep=",");
 CHM_DSNY=D[2:dim(D)[1],2:dim(D)[2]];
 CHM_Value=matrix(0,dim(UTM_DSNY_CorrespondingUnitArea)[1],1);
 for (i in 1:dim(UTM_DSNY_CorrespondingUnitArea)[1])
@@ -104,7 +104,7 @@ UTM_HARV_Soilcore <- LatitudeLongitudeToUTM(coord_HARV[,2],coord_HARV[,1],1:6,18
 UTM_HARV_CorrespondingUnitArea <- cbind(floor(UTM_HARV_Soilcore[,2]/1000)*1000,floor(UTM_HARV_Soilcore[,3]/1000)*1000);
 
 ## Finding the corresponding mean CHM value
-D=read.csv("HARV_CHM_2014.csv",header=TRUE, sep=",");
+D=read.csv("/usr3/graduate/wangytj/GE585-Share/HARV_CHM_2014.csv",header=TRUE, sep=",");
 CHM_HARV=D[2:dim(D)[1],2:dim(D)[2]];
 CHM_Value=matrix(0,dim(UTM_HARV_CorrespondingUnitArea)[1],1);
 for (i in 1:dim(UTM_HARV_CorrespondingUnitArea)[1])
@@ -135,7 +135,7 @@ UTM_OSBS_Soilcore <- LatitudeLongitudeToUTM(coord_OSBS[,2],coord_OSBS[,1],1:6,17
 UTM_OSBS_CorrespondingUnitArea <- cbind(floor(UTM_OSBS_Soilcore[,2]/1000)*1000,floor(UTM_OSBS_Soilcore[,3]/1000)*1000);
 
 ## Finding the corresponding mean CHM value
-D=read.csv("OSBS_CHM_2014.csv",header=TRUE, sep=",");
+D=read.csv("/usr3/graduate/wangytj/GE585-Share/OSBS_CHM_2014.csv",header=TRUE, sep=",");
 CHM_OSBS=D[2:dim(D)[1],2:dim(D)[2]];
 CHM_Value=matrix(0,dim(UTM_OSBS_CorrespondingUnitArea)[1],1);
 for (i in 1:dim(UTM_OSBS_CorrespondingUnitArea)[1])
@@ -167,7 +167,7 @@ UTM_STER_Soilcore <- LatitudeLongitudeToUTM(coord_STER[,2],coord_STER[,1],1:6,13
 UTM_STER_CorrespondingUnitArea <- cbind(floor(UTM_STER_Soilcore[,2]/1000)*1000,floor(UTM_STER_Soilcore[,3]/1000)*1000);
 
 ## Finding the corresponding mean CHM value
-D=read.csv("STER_CHM_2013.csv",header=TRUE, sep=",");
+D=read.csv("/usr3/graduate/wangytj/GE585-Share/STER_CHM_2013.csv",header=TRUE, sep=",");
 CHM_STER=D[2:dim(D)[1],2:dim(D)[2]];
 CHM_Value=matrix(0,dim(UTM_STER_CorrespondingUnitArea)[1],1);
 for (i in 1:dim(UTM_STER_CorrespondingUnitArea)[1])
