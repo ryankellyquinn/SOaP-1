@@ -16,12 +16,12 @@ sites <- c("DSNY", "HARV", "OSBS", "CPER", "STER")
 # 4. once files have been downloaded, we merge them all together.
 
 # 1. check if output file exists
-if(file.exists("NEON_soil_phys_merge.rds")) {
+if(file.exists("data/NEON_soil_phys_merge.rds")) {
   
   # 2. if it exists, check for new files to download
   
   # read in file, if this script has been run before
-  downloaded_data <- readRDS("NEON_soil_phys_merge.rds")
+  downloaded_data <- readRDS("data/NEON_soil_phys_merge.rds")
   downloaded_dates <- downloaded_data[,c("siteID", "dateID")]
   
   #connect to NEON API for DP1.10086.00.----
@@ -49,44 +49,44 @@ if(file.exists("NEON_soil_phys_merge.rds")) {
     for (d in nrow(to_download)){
       getPackage(dpID = "DP1.10086.001", site_code = to_download[d,1], year_month = to_download[d,2], package="expanded", savepath = "new_soil_phys_files/")
     }
-    stackByTable("new_soil_phys_files", folder=T)
+    stackByTable("data/new_soil_phys_files", folder=T)
     
     # read in new files
-    soil_pH_new <- read.csv("new_soil_phys_files/stackedFiles/sls_soilpH.csv")
-    soil_moisture_new <- read.csv("new_soil_phys_files/stackedFiles/sls_soilMoisture.csv")
-    soil_core_new <- read.csv("new_soil_phys_files/stackedFiles/sls_soilCoreCollection.csv")
+    soil_pH_new <- read.csv("data/new_soil_phys_files/stackedFiles/sls_soilpH.csv")
+    soil_moisture_new <- read.csv("data/new_soil_phys_files/stackedFiles/sls_soilMoisture.csv")
+    soil_core_new <- read.csv("data/new_soil_phys_files/stackedFiles/sls_soilCoreCollection.csv")
     
     # read in older files
-    soil_pH_old <- read.csv("filesToStack10086/stackedFiles/sls_soilpH.csv")
-    soil_moisture_old <- read.csv("filesToStack10086/stackedFiles/sls_soilMoisture.csv")
-    soil_core_old <- read.csv("filesToStack10086/stackedFiles/sls_soilCoreCollection.csv")
+    soil_pH_old <- read.csv("data/filesToStack10086/stackedFiles/sls_soilpH.csv")
+    soil_moisture_old <- read.csv("data/filesToStack10086/stackedFiles/sls_soilMoisture.csv")
+    soil_core_old <- read.csv("data/filesToStack10086/stackedFiles/sls_soilCoreCollection.csv")
     
     # combine them 
-    if(exists("soil_pH_new")){
+    if(exists("data/soil_pH_new")){
       soil_pH <- rbind(soil_pH_old, soil_pH_new)
     } else {
       soil_pH <- soil_pH_old
     }
-    if(exists("soil_moisture_new")){
+    if(exists("data/soil_moisture_new")){
       soil_moisture <- rbind(soil_moisture_old, soil_moisture_new)
     } else {
       soil_moisture <- soil_moisture_old
     }
-    if(exists("soil_core_new")){
+    if(exists("data/soil_core_new")){
       soil_core <- rbind(soil_core_old, soil_core_new)
     } else {
       soil_core <- soil_core_old
     }
     
     # remove the directory we created
-    unlink("new_soil_phys_files", recursive=T)
+    unlink("data/new_soil_phys_files", recursive=T)
     
   } else { # if output file exists but to_download is empty, read in older files
     
     # read in older files
-    soil_pH <- read.csv("filesToStack10086/stackedFiles/sls_soilpH.csv")
-    soil_moisture <- read.csv("filesToStack10086/stackedFiles/sls_soilMoisture.csv")
-    soil_core <- read.csv("filesToStack10086/stackedFiles/sls_soilCoreCollection.csv")
+    soil_pH <- read.csv("data/filesToStack10086/stackedFiles/sls_soilpH.csv")
+    soil_moisture <- read.csv("data/filesToStack10086/stackedFiles/sls_soilMoisture.csv")
+    soil_core <- read.csv("data/filesToStack10086/stackedFiles/sls_soilCoreCollection.csv")
     
   }
 } else { #3. if no output file exists, download everything
@@ -99,9 +99,9 @@ if(file.exists("NEON_soil_phys_merge.rds")) {
   stackByTable("filesToStack10086", folder = T)
   
   # read in older files
-  soil_pH <- read.csv("filesToStack10086/stackedFiles/sls_soilpH.csv")
-  soil_moisture <- read.csv("filesToStack10086/stackedFiles/sls_soilMoisture.csv")
-  soil_core <- read.csv("filesToStack10086/stackedFiles/sls_soilCoreCollection.csv")
+  soil_pH <- read.csv("data/filesToStack10086/stackedFiles/sls_soilpH.csv")
+  soil_moisture <- read.csv("data/filesToStack10086/stackedFiles/sls_soilMoisture.csv")
+  soil_core <- read.csv("data/filesToStack10086/stackedFiles/sls_soilCoreCollection.csv")
   
 }
 
@@ -122,7 +122,7 @@ soil_phys_merge <- merge(soil_moisture.merge, soil_pH_core.merge,  by = "sampleI
 dim(soil_phys_merge)
 soil_phys_merge$newdate <- as.Date(as.yearmon(soil_phys_merge$collectDate)) #make a new column with the collection date, titled "new date"
 soil_phys_merge$dateID <- substr(soil_phys_merge$newdate, 1, 7)
-saveRDS(soil_phys_merge, "NEON_soil_phys_merge.rds") # save data as a .rds file (smaller than a .csv, easier to read into R) 
+saveRDS(soil_phys_merge, "data/NEON_soil_phys_merge.rds") # save data as a .rds file (smaller than a .csv, easier to read into R) 
 
 #below is for chopping certain dates off (validation)
 #just_calibration <- soil_phys_merge[which(soil_phys_merge$newdate < "2015-01-01"),] #get rid of everything before 01/2015
