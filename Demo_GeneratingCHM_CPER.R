@@ -38,4 +38,4 @@ for (time in 2013:2013)
     }    
   }  
 }
-write.csv(head,file=sprintf("CPER_CHM_%i.CSV",time))
+write.csv(head,file=sprintf("/usr3/graduate/wangytj/GE585-Share/CPER_CHM_%i.CSV",time))

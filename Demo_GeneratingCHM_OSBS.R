@@ -38,4 +38,4 @@ for (time in 2014:2014)
     }    
   }  
 }
-write.csv(head,file=sprintf("OSBS_CHM_%i.CSV",time))
+write.csv(head,file=sprintf("/usr3/graduate/wangytj/GE585-Share/OSBS_CHM_%i.CSV",time))

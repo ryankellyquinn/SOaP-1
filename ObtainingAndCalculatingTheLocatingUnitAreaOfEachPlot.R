@@ -49,7 +49,7 @@ for (i in 1:dim(UTM_CPER_CorrespondingUnitArea)[1])
 name=c("Plot ID","Long","Lat",c("UTM east","UTM north"),c("UTM east of lower left","UTM north of lower left"),"Mean CHM");
 Output=cbind(soilcore.df$plotID,coord_CPER[,2],coord_CPER[,1],UTM_CPER_Soilcore[,2:3],UTM_CPER_CorrespondingUnitArea,CHM_Value);
 colnames(Output) <- name
-write.csv(Output,file="CPER_Soilcore_CorrespondingMeanCHM_OfEachPlot_2013.csv");
+write.csv(Output,file="/usr3/graduate/wangytj/GE585-Share/CPER_Soilcore_CorrespondingMeanCHM_OfEachPlot_2013.csv");
 
 
 
@@ -82,7 +82,7 @@ for (i in 1:dim(UTM_DSNY_CorrespondingUnitArea)[1])
 name=c("Plot ID","Long","Lat",c("UTM east","UTM north"),c("UTM east of lower left","UTM north of lower left"),"Mean CHM");
 Output=cbind(soilcore.df$plotID,coord_DSNY[,2],coord_DSNY[,1],UTM_DSNY_Soilcore[,2:3],UTM_DSNY_CorrespondingUnitArea,CHM_Value);
 colnames(Output) <- name
-write.csv(Output,file="DSNY_Soilcore_CorrespondingMeanCHM_OfEachPlot_2014.csv")
+write.csv(Output,file="/usr3/graduate/wangytj/GE585-Share/DSNY_Soilcore_CorrespondingMeanCHM_OfEachPlot_2014.csv")
 
 
 
@@ -115,7 +115,7 @@ for (i in 1:dim(UTM_HARV_CorrespondingUnitArea)[1])
 name=c("Plot ID","Long","Lat","UTM east","UTM north","UTM east of lower left","UTM north of lower left","Mean CHM");
 Output=cbind(soilcore.df$plotID,coord_HARV[,2],coord_HARV[,1],UTM_HARV_Soilcore[,2:3],UTM_HARV_CorrespondingUnitArea,CHM_Value);
 colnames(Output) <- name
-write.csv(Output,file="HARV_Soilcore_CorrespondingMeanCHM_OfEachPlot_2014.csv")
+write.csv(Output,file="/usr3/graduate/wangytj/GE585-Share/HARV_Soilcore_CorrespondingMeanCHM_OfEachPlot_2014.csv")
 
 
 
@@ -146,7 +146,7 @@ for (i in 1:dim(UTM_OSBS_CorrespondingUnitArea)[1])
 name=c("plot ID","Long","Lat","UTM east","UTM north","UTM east of lower left","UTM north of lower left","Mean CHM");
 Output=cbind(soilcore.df$plotID,coord_OSBS[,2],coord_OSBS[,1],UTM_OSBS_Soilcore[,2:3],UTM_OSBS_CorrespondingUnitArea,CHM_Value);
 colnames(Output) <- name
-write.csv(Output,file="OSBS_Soilcore_CorrespondingMeanCHM_OfEachPlot_2014.csv")
+write.csv(Output,file="/usr3/graduate/wangytj/GE585-Share/OSBS_Soilcore_CorrespondingMeanCHM_OfEachPlot_2014.csv")
 
 
 
@@ -178,7 +178,7 @@ for (i in 1:dim(UTM_STER_CorrespondingUnitArea)[1])
 name=c("plot ID","Long","Lat","UTM east","UTM north","UTM east of lower left","UTM north of lower left","Mean CHM");
 Output=cbind(soilcore.df$plotID,coord_STER[,2],coord_STER[,1],UTM_STER_Soilcore[,2:3],UTM_STER_CorrespondingUnitArea,CHM_Value);
 colnames(Output) <- name
-write.csv(Output,file="STER_Soilcore_CorrespondingMeanCHM_OfEachPlot_2013.csv")
+write.csv(Output,file="/usr3/graduate/wangytj/GE585-Share/STER_Soilcore_CorrespondingMeanCHM_OfEachPlot_2013.csv")
 
 
 
