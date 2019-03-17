@@ -4,6 +4,7 @@ library(raster)
 library(sp)
 
 #Define sites, variables of interest, coordinates of sites
+#lat and longs come from: https://www.neonscience.org/field-sites/field-sites-map/list
 site = c('HARV', 'DSNY', 'OSBS', 'STER', 'CPER')
 r <- getData('worldclim', var='bio',res=10)
 r <- r[[c(1,12, 4, 15)]]

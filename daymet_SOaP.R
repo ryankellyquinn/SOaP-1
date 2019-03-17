@@ -4,6 +4,7 @@ library(daymetr)
 
 ## I saw the code from Exercise_06 and expanded it to grab the data from all of our sites...
 #LIST OF sites
+#lat and longs come from: https://www.neonscience.org/field-sites/field-sites-map/list
 locs <- data.frame(site = c('HARV', 'DSNY', 'OSBS', 'STER', 'CPER'),
                    lat = c(42.5369, 28.12504, 29.68927, 40.4619, 40.81553),
                    lon = c(-72.17266, -81.4362, -81.99343, -103.0293, -104.7456 ))
