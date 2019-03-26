@@ -1,4 +1,4 @@
-#install libraries necessary to run script
+#install libraries necessary to run script.
 library(readr)
 library(data.table)
 #load data 

@@ -1,4 +1,4 @@
-#read in data
+#read in data.
 soil <- readRDS("data/soil_chm_phys.rds")
 colnames(soil)
 mean.ph.water <- aggregate(list(soil$waterpHRatio), by = list(soil$siteID, soil$newdate), "mean")
