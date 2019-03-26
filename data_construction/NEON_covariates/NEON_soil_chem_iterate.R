@@ -5,7 +5,6 @@
 rm(list=ls())
 library(zoo)
 library(neonUtilities)
-foldername <- "/usr3/graduate/rkq/NEON_data/"
 
 sites <- c("DSNY", "HARV", "OSBS", "CPER", "STER")
 
@@ -47,7 +46,9 @@ if(file.exists("data/NEON_soil_chm_merge.rds")) {
     
     #if there are dates in to_download, let's use getPackage() on those dates 
     for (d in nrow(to_download)){
-      getPackage(dpID = "DP1.10078.001", site_code = to_download[d,1], year_month = to_download[d,2], package="expanded", savepath = "new_soil_chm_files/")
+      getPackage(dpID = "DP1.10078.001", site_code = to_download[d,1], 
+                 year_month = to_download[d,2], package="expanded", 
+                 savepath = "data/new_soil_chm_files")
     }
     stackByTable("data/new_soil_chm_files", folder=T)
     
@@ -77,7 +78,8 @@ if(file.exists("data/NEON_soil_chm_merge.rds")) {
   
   # loop through 5 sites to download data from each
   for (s in 1:length(sites)){
-    zipsByProduct(dpID="DP1.10078.001", sites[s], package="expanded", check.size = T)
+    zipsByProduct(dpID="DP1.10078.001", sites[s], package="expanded", 
+                  savepath = "data", check.size = FALSE)
   }
   # combine them all into fewer files
   stackByTable("data/filesToStack10078", folder = T)

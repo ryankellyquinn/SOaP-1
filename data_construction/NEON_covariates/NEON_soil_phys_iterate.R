@@ -1,11 +1,14 @@
 #Script completed by Zoey and Ryan
 
+# script expects that you keep the raw data within its filesToStack10086 folder, 
+# and everything saves within /data. 
+# will throw errors if you delete the raw files but keep the merged output.
+
 # script to download soil physical data, distributed periodic, dp.10086.001, from NEON
 # clear environment, load packages and set file paths
 rm(list=ls())
 library(zoo)
 library(neonUtilities)
-foldername <- "/usr3/graduate/rkq/NEON_data/"
 
 sites <- c("DSNY", "HARV", "OSBS", "CPER", "STER")
 
@@ -43,11 +46,13 @@ if(file.exists("data/NEON_soil_phys_merge.rds")) {
   
   if (nrow(to_download) > 0){ # if there ARE files in to_download
     
-    dir.create("new_soil_phys_files")
+    dir.create("data/new_soil_phys_files")
     
     #if there are dates in to_download, let's use getPackage() on those dates 
     for (d in nrow(to_download)){
-      getPackage(dpID = "DP1.10086.001", site_code = to_download[d,1], year_month = to_download[d,2], package="expanded", savepath = "new_soil_phys_files/")
+      getPackage(dpID = "DP1.10086.001", site_code = to_download[d,1], 
+                 year_month = to_download[d,2], package="expanded", 
+                 savepath = "data/new_soil_phys_files/")
     }
     stackByTable("data/new_soil_phys_files", folder=T)
     
@@ -93,10 +98,10 @@ if(file.exists("data/NEON_soil_phys_merge.rds")) {
   
   # loop through 5 sites to download data from each
   for (s in 1:length(sites)){
-    zipsByProduct(dpID="DP1.10086.001", sites[s], package="expanded", check.size = T)
+    zipsByProduct(dpID="DP1.10086.001", sites[s], package="expanded", check.size = FALSE, savepath = "data")
   }
   # combine them all into fewer files
-  stackByTable("filesToStack10086", folder = T)
+  stackByTable("data/filesToStack10086", folder = T)
   
   # read in older files
   soil_pH <- read.csv("data/filesToStack10086/stackedFiles/sls_soilpH.csv")
