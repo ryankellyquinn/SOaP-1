@@ -71,11 +71,10 @@ df_merged$bacteriaAndArchaea <- df_merged$bacteriaAndArchaea + 1
 
 # calculate ratio of bacteria and archaea to fungi
 df_merged$ratio <-  df_merged$bacteriaAndArchaea / df_merged$fungi
-df_merged$dateID <- as.yearmon(df_merged$dateID)
+#df_merged$dateID <- as.yearmon(df_merged$dateID)
 rownames(df_merged) <- df_merged$geneticSampleID
 df_merged <- df_merged[, !names(df_merged) %in% c("collectDate", "nucleicAcidConcentration","geneticSampleID")]
 
-df_merged[df_merged$siteID=="HARV",]
 ##### METHOD 1 - average ratios from each sample/date, to the site level
 
 df_method1 <- aggregate(list(ratio = df_merged$ratio), 
