@@ -81,6 +81,7 @@ points(OSBSdta, osbs_wx$tmin..deg.c., type='l', col=rgb(red=1,green=1,blue=0, al
 points(STERdta, ster_wx$tmin..deg.c., type='l', col=rgb(red=0,green=1,blue=1, alpha=0.5))
 points(CPERdta, cper_wx$tmin..deg.c., type='l', col=rgb(red=0,green=0,blue=1, alpha=0.5))
 
+
 #plot of max temps for each site
 plot(HARVdta, harv_wx$tmax..deg.c., type='l', ylim=c(-20,40))
 points(DSNYdta, dsny_wx$tmax..deg.c., type='l', col=rgb(red=1,green=0,blue=0, alpha=0.5))
@@ -94,3 +95,27 @@ points(DSNYdta, dsny_wx$prcp..mm.day, type='l', col=rgb(red=1,green=0,blue=0, al
 points(OSBSdta, osbs_wx$prcp..mm.day, type='l', col=rgb(red=1,green=1,blue=0, alpha=0.3))
 points(STERdta, ster_wx$prcp..mm.day, type='l', col=rgb(red=0,green=1,blue=1, alpha=0.5))
 points(CPERdta, cper_wx$prcp..mm.day, type='l', col=rgb(red=0,green=0,blue=1, alpha=0.5))
+
+
+harv_wx$site <- rep('HARV', length(harv_wx$dayyear))
+dsny_wx$site <- rep('DSNY', length(dsny_wx$dayyear))
+osbs_wx$site <- rep('OSBS', length(osbs_wx$dayyear))
+ster_wx$site <- rep('STER', length(ster_wx$dayyear))
+cper_wx$site <- rep('CPER', length(cper_wx$dayyear))
+
+
+all_daymet <- rbind(harv_wx, dsny_wx, osbs_wx, ster_wx, cper_wx)
+
+precip_mintemp <- cbind.data.frame(all_daymet$site, all_daymet$dayyear, all_daymet$prcp..mm.day., all_daymet$tmin..deg.c.)
+colnames(precip_mintemp) <- c('siteID', 'Date', 'Precipitation.mm.day', 'Average.minimum.temperature.deg.C')
+
+#precip_mintemp$Date <- as.Date(precip_mintemp$Date, format = "%m-%d-%Y")
+precip_mintemp$dateID <- substr(precip_mintemp$Date, 1, 7)
+monthly_avg <- precip_mintemp %>% 
+  group_by(siteID, dateID) %>%                           
+  summarise(min_temp.C_avg = mean(Average.minimum.temperature.deg.C), 
+            min_temp.C_sd = sd(Average.minimum.temperature.deg.C),
+            precip.mm_avg = mean(Precipitation.mm.day),
+            precip.mm_sd = sd(Precipitation.mm.day))
+
+saveRDS(monthly_avg, "data/daymet_monthly.rds")
