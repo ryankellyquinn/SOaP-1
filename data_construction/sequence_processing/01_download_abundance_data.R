@@ -89,6 +89,7 @@ validation <- df_method1[which(df_method1$dateID > "2015-01"),]
 ggplot(data = calibration, aes(x = factor(dateID), y = log(ratio), color = siteID)) +       
   geom_line(aes(group = siteID)) + geom_point()
 
+saveRDS(calibration, "data/calibration_abundances.rds")
 
 # ##### METHOD 2 - actually this is the same thing
 # 
