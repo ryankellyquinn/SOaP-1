@@ -107,5 +107,15 @@ cper_wx$site <- rep('CPER', length(cper_wx$dayyear))
 all_daymet <- rbind(harv_wx, dsny_wx, osbs_wx, ster_wx, cper_wx)
 
 precip_mintemp <- cbind.data.frame(all_daymet$site, all_daymet$dayyear, all_daymet$prcp..mm.day., all_daymet$tmin..deg.c.)
-colnames(precip_mintemp) <- c('Site', 'Date', 'Precipitation.mm.day', 'Average.minimum.temperature.deg.C')
+colnames(precip_mintemp) <- c('siteID', 'Date', 'Precipitation.mm.day', 'Average.minimum.temperature.deg.C')
 
+#precip_mintemp$Date <- as.Date(precip_mintemp$Date, format = "%m-%d-%Y")
+precip_mintemp$dateID <- substr(precip_mintemp$Date, 1, 7)
+monthly_avg <- precip_mintemp %>% 
+  group_by(siteID, dateID) %>%                           
+  summarise(min_temp.C_avg = mean(Average.minimum.temperature.deg.C), 
+            min_temp.C_sd = sd(Average.minimum.temperature.deg.C),
+            precip.mm_avg = mean(Precipitation.mm.day),
+            precip.mm_sd = sd(Precipitation.mm.day))
+
+saveRDS(monthly_avg, "data/daymet_monthly.rds")
