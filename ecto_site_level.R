@@ -1,4 +1,4 @@
-#load data.
+#load data..
 dat <- readRDS("data/NEON_soil_tree_merge.rds")
 unique(dat$siteID)
 unique(dat[,c("plotID", "dateID")])
